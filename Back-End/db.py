@@ -20,7 +20,10 @@ def create_database_and_tables():
         CREATE TABLE Articles (
             id INTEGER PRIMARY KEY,
             title TEXT NOT NULL,
+            author TEXT NOT NULL,
             content TEXT NOT NULL,
+            slug TEXT NOT NULL,
+            date TEXT NOT NULL,
             user_id INTEGER,
             FOREIGN KEY(user_id) REFERENCES User(id)
         )
@@ -31,6 +34,7 @@ def create_database_and_tables():
         CREATE TABLE Comments (
             id INTEGER PRIMARY KEY,
             content TEXT NOT NULL,
+            date TEXT NOT NULL,
             user_id INTEGER,
             article_id INTEGER,
             FOREIGN KEY(user_id) REFERENCES User(id),
