@@ -71,7 +71,12 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
             fullWidth
           />
-          <Button type="submit" variant="contained" sx={{ marginTop: 2 }}>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ marginTop: 2 }}
+            disabled={!username || !password}
+          >
             Login
           </Button>
         </Box>

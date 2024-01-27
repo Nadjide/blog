@@ -7,11 +7,18 @@ function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("Les mots de passes ne sont pas similaires");
+      return;
+    }
+
     fetch("http://127.0.0.1:8000/register", {
       method: "POST",
       headers: {
@@ -31,7 +38,7 @@ function Register() {
       })
       .then((data) => {
         console.log(data);
-        setUser({ 
+        setUser({
           username: username,
           id: data.id,
         });
@@ -41,6 +48,7 @@ function Register() {
         console.error("Error:", error);
       });
   };
+
   return (
     <Box
       display="flex"
@@ -76,11 +84,28 @@ function Register() {
             onChange={(e) => setPassword(e.target.value)}
             fullWidth
           />
-          <Button type="submit" variant="contained" sx={{ marginTop: 2 }}>
+          <TextField // Add this block
+            label="Confirm Password"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            fullWidth
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ marginTop: 2 }}
+            disabled={!username || !password || !email || !confirmPassword}
+          >
             Register
           </Button>
         </Box>
-        <Link to="/login">Already have an account? Log in</Link>
+        <Link
+          to="/login"
+          style={{ display: "block", textAlign: "center", marginTop: "10px" , textDecoration: "none", color: "black"}}
+        >
+          Already have an account? Log in
+        </Link>
       </Paper>
     </Box>
   );

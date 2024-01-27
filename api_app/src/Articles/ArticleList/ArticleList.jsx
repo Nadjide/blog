@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import ArticleIcon from "@mui/icons-material/Article";
 import EditIcon from "@mui/icons-material/Edit";
 import { AuthContext } from "../../AuthContext";
+import SearchBar from "../../Search/Search";
 
 export default function ArticleList() {
   const [articles, setArticles] = useState([]);
@@ -34,6 +35,7 @@ export default function ArticleList() {
       <Typography variant="h4" sx={{ mb: 4, textAlign: "center" }}>
         Articles List
       </Typography>
+      <SearchBar setArticles={setArticles} />
       <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
         <Button
           variant="contained"

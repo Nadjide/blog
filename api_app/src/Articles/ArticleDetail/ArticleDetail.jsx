@@ -55,7 +55,6 @@ export default function ArticleDetail() {
       .then((response) => response.json())
       .then((data) => {
         setComments((prevComments) => [...prevComments, data]);
-        console.log("Comment submitted:", data);
       })
       .finally(() => {
         setIsSubmitting(false);
