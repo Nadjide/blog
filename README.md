@@ -17,7 +17,10 @@ Ce projet est composé de deux parties principales : le backend, construit avec 
    pip install -r requirements.txt
    ```
 
-3. **Lancement du serveur FastAPI**:
+3. **Création de la base de données SQLITE**:
+   Si le fichier `blog.db` n'est pas présent dans le dossier `back-end`, exécutez le script `db.py` pour créer la base de données SQLite et la placer dans le dossier `back-end`.
+
+4. **Lancement du serveur FastAPI**:
    Lancez le serveur FastAPI en utilisant uvicorn avec la commande suivante :
    ```
    uvicorn main:app --reload
