@@ -6,6 +6,7 @@ import { AuthContext } from "../AuthContext";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // Add this line
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
 
@@ -24,7 +25,9 @@ export default function Login() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Login failed");
+          return response.json().then((data) => {
+            throw new Error(data.detail); // Change this line
+          });
         }
         return response.json();
       })
@@ -37,6 +40,7 @@ export default function Login() {
         navigate("/");
       })
       .catch((error) => {
+        setErrorMessage(error.message); // Add this line
         console.error("Error:", error);
       });
   };
@@ -53,6 +57,11 @@ export default function Login() {
         <Typography variant="h5" sx={{ marginBottom: 2, textAlign: "center" }}>
           Login
         </Typography>
+        {errorMessage && ( // Add this block
+          <Typography variant="body2" color="error">
+            {errorMessage}
+          </Typography>
+        )}
         <Box
           component="form"
           onSubmit={handleSubmit}
