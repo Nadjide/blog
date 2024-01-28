@@ -84,7 +84,7 @@ function Register() {
             onChange={(e) => setPassword(e.target.value)}
             fullWidth
           />
-          <TextField // Add this block
+          <TextField 
             label="Confirm Password"
             type="password"
             value={confirmPassword}
@@ -104,7 +104,7 @@ function Register() {
           to="/login"
           style={{ display: "block", textAlign: "center", marginTop: "10px" , textDecoration: "none", color: "black"}}
         >
-          Already have an account? Log in
+          Deja un compte ? Connectez-vous
         </Link>
       </Paper>
     </Box>
