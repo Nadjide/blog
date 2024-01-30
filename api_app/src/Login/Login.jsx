@@ -6,41 +6,30 @@ import { AuthContext } from "../AuthContext";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(""); // Add this line
+  const [errorMessage, setErrorMessage] = useState(""); 
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     fetch("http://127.0.0.1:8000/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
+      headers: {"Content-Type": "application/json",},
+      body: JSON.stringify({username: username,password: password,}),
     })
       .then((response) => {
         if (!response.ok) {
           return response.json().then((data) => {
-            throw new Error(data.detail); // Change this line
-          });
-        }
-        return response.json();
+            throw new Error(data.detail);});
+        }return response.json();
       })
       .then((data) => {
         localStorage.setItem("token", data.access_token);
-        setUser({
-          username: data.username,
-          id: data.id,
-        });
+        setUser({username: data.username,id: data.id,});
         navigate("/");
       })
       .catch((error) => {
-        setErrorMessage(error.message); // Add this line
+        setErrorMessage(error.message);
         console.error("Error:", error);
       });
   };
@@ -57,7 +46,7 @@ export default function Login() {
         <Typography variant="h5" sx={{ marginBottom: 2, textAlign: "center" }}>
           Login
         </Typography>
-        {errorMessage && ( // Add this block
+        {errorMessage && (
           <Typography variant="body2" color="error">
             {errorMessage}
           </Typography>
